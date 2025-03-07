@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+    perspective: 800px; /* Adds 3D depth effect */
+}
+
+.container {
+    position: relative;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+}
+
+/* On hover, rotate the entire container */
+.container:hover{
+    transform: rotateX(180deg) rotateY(180deg);
+}
+
+.circle {
+    position: absolute;
+    background: transparent;
+    width: calc(var(--i) * 2.5vmin);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 3.3px dotted rgb(0, 255, 13);
+    transform-style: preserve-3d;
+    transform: rotateX(70deg) translateZ(50px);
+    animation: animate 3s ease-in-out calc(var(--i) * 0.08s) infinite;
+    box-shadow: 0 0 15px rgb(124, 124, 124), inset 0 0 15px rgb(124, 124, 124);
+}
+
+/* Each circle will have a different hover effect for depth */
+.circle:nth-child(odd):hover {
+    transform: rotateX(80deg) translateZ(80px) scale(1.2);
+}
+
+.circle:nth-child(even):hover {
+    transform: rotateX(60deg) translateZ(40px) scale(1.1);
+}
+
+@keyframes animate {
+    0% {
+        transform: rotateX(70deg) translateZ(50px) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: rotateX(70deg) translateZ(100px) scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: rotateX(70deg) translateZ(50px) scale(1);
+        opacity: 1;
+    }
+}
